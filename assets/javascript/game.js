@@ -3,20 +3,20 @@ let current = 0
 let wins = 0
 let losses = 0
 
-const renderGems = () => {
+const renderCrystals = () => {
   current = 0
-  targetNum =  Math.floor(Math.random() * 120) + 19
+  targetNum = Math.floor(Math.random() * 120) + 19
   document.getElementById(`crystals`).innerHTML = ` `
-  for (let i = 0; i < 4; i ++){
-    const random = Math.floor(Math.random () * 12) + 1
-    let gemElem = document.createElement(`div`)
-    gemElem.className = `col-3`
-    gemElem.innerHTML = `
+  for (let i = 0; i < 4; i++) {
+    const random = Math.floor(Math.random() * 12) + 1
+    let crystalElem = document.createElement(`div`)
+    crystalElem.className = `col-3`
+    crystalElem.innerHTML = `
       <div class="card border-0 bg-light pb-2" >
             <img class="crystal" src="./assets/images/gem${i + 1}.png" data-value="${random}" width="200" height="200">
         </div>
     `
-    document.getElementById(`crystals`).append(gemElem)
+    document.getElementById(`crystals`).append(crystalElem)
   }
   document.getElementById('targetNum').textContent = targetNum
   document.getElementById('currentNum').textContent = currentNum
@@ -25,8 +25,17 @@ const renderGems = () => {
 }
 
 document.addEventListener('click', event => {
-  if (event.target.className === 'crystal' ) {
-    
+  if (event.target.className === 'crystal') {
+    let crystalValue = parseInt(event.target.dataset.value)
+    currentNum += crystalValue
+    if (currentNum === targetNum) {
+      wins++
+    } else if (currentNum > targetNum) {
+      losses++
+      renderCrystals()
+    } else {
+      document.getElementById(`currentNum`).textContent = currentNum
+    }
   }
 })
-renderGems()
+renderCrystals()
