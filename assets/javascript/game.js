@@ -1,11 +1,11 @@
-let targetNum = Math.floor(Math.random() * 120) + 19
+let targetNum = Math.floor(Math.random() * 100) + 19
 let currentNum = 0
 let wins = 0
 let losses = 0
 
 const renderCrystals = () => {
-  current = 0
-  targetNum = Math.floor(Math.random() * 120) + 19
+  currentNum = 0
+  targetNum = Math.floor(Math.random() * 100) + 19
   document.getElementById(`crystals`).innerHTML = ` `
   for (let i = 0; i < 4; i++) {
     const random = Math.floor(Math.random() * 12) + 1
@@ -30,6 +30,7 @@ document.addEventListener('click', event => {
     currentNum += crystalValue
     if (currentNum === targetNum) {
       wins++
+      renderCrystals()
     } else if (currentNum > targetNum) {
       losses++
       renderCrystals()
